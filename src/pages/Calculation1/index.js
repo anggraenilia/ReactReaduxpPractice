@@ -5,23 +5,21 @@ import {
     StyleSheet,
     Button,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Calculation1 = () => {
-    const [number, setNumber] = useState(0);
-
-    const Add = () => {
-        setNumber(number + 1)
-    }
-
-    const Subtract = () => {
-        setNumber(number - 1)
-    }
+    const number = useSelector(state => state.number)
+    const dispatch = useDispatch()
 
     return (
         <View style={styles.page}>
-            <Button title="Tambah" onPress={Add} />
+            <Button title="Tambah" onPress={() => dispatch({
+                type: 'ADD'
+            })} />
             <Text style={styles.text}>{number}</Text>
-            <Button title="Kurang" onPress={Subtract} />
+            <Button title="Kurang" onPress={() => dispatch({
+                type: "SUBTRACT"
+            })} />
         </View>
     )
 }
